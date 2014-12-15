@@ -1,13 +1,13 @@
 import eyed3
 import sys
 import os
-import auth
+from auth import auth
 import urlparse
 import oauth2 as oauth
 
-client = auth.authenticate()
+discogs = auth()
 
-resp, content = client.request("https://api.discogs.com/images/R-40522-1098545214.jpg", headers={'User-Agent': user_agent})
+resp, content = discogs.client.request("https://api.discogs.com/images/R-40522-1098545214.jpg", headers={'User-Agent': discogs.user_agent})
 
 with open('folder.jpg', 'w') as fh:
 	fh.write(content)
