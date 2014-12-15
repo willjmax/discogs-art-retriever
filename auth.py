@@ -9,7 +9,6 @@ class auth:
 		request_token_url = "https://api.discogs.com/oauth/request_token"
 		authorize_url = "https://www.discogs.com/oauth/authorize"
 		access_token_url = "https://api.discogs.com/oauth/access_token"
-		user_agent = "Album Art Fetcher"
 
 		consumer = oauth.Consumer(keys.consumer_key, keys.consumer_secret)
 		client = oauth.Client(consumer)
