@@ -26,6 +26,18 @@ if args['recursive']:
 		resp, image = discogs.client.request(json_result['results'][0]['thumb'], headers={'User-Agent': discogs.user_agent})
 		with open(os.path.join(root, 'folder.jpg'), 'w') as fh:
 			fh.write(image)
+else:
+	files = os.listdir(args['path'])
+	files = [f for f in files if f.endswith(extensions)]
+	for name in files:
+		tag = eyed3.load(args['path'] + "/" + name)
+		artist = tag.tag.artist
+		release = tag.tag.album
+		resp, content = discogs.client.request("https://api.discogs.com/database/search?release_title={0}&artist={1}".format(release, artist), headers={'User-Agent': discogs.user_agent})
+		json_result = json.loads(content)
+		resp, image = discogs.client.request(json_result['results'][0]['thumb'], headers={'User-Agent': discogs.user_agent})
+		with open(args['path'] + '/folder.jpg', 'w') as fh:
+			fh.write(image)	
 
 
 
